@@ -1,0 +1,11 @@
+[package]
+name = "little_helpers"
+version = "0.1.0"
+edition = "2021"
+authors = ["Håvard Skordal Thorsen <hstst2006@gmail.com>"]
+description = "A package of helper functions for the Advent of Code challenges."
+repository = "https://github.com/hstst2006/little_helpers"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
