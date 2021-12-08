@@ -2,6 +2,7 @@
 
 use std::fs::{File, read_to_string};
 use std::io::{BufRead, BufReader, Write};
+use std::collections::HashMap;
 
 /// Returns a vector of values from a file using lines
 ///
@@ -98,4 +99,15 @@ pub fn read_listified<T: std::str::FromStr>(file_in: String, delimiter: char) ->
     drop(i);
 
     file_contents
+}
+
+//Adds a key/value pair to a hashmap, if the key already exists overwrite that key's value
+pub fn place_in_map<T: Eq + core::hash::Hash, U>(map: &mut HashMap<T, U>, key: T, value: U) {
+    if !map.contains_key(&(key)) {
+        map.insert(key, value);
+    } else {
+        if let Some(v) = map.get_mut(&key) {
+            *v = value;
+        }
+    }
 }
