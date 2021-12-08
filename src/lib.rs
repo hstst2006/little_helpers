@@ -101,7 +101,7 @@ pub fn read_listified<T: std::str::FromStr>(file_in: String, delimiter: char) ->
     file_contents
 }
 
-//Adds a key/value pair to a hashmap, if the key already exists overwrite that key's value
+///Adds a key/value pair to a hashmap, if the key already exists overwrite that key's value
 pub fn place_in_map<T: Eq + core::hash::Hash, U>(map: &mut HashMap<T, U>, key: T, value: U) {
     if !map.contains_key(&(key)) {
         map.insert(key, value);
