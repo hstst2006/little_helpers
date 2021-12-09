@@ -101,13 +101,25 @@ pub fn read_listified<T: std::str::FromStr>(file_in: String, delimiter: char) ->
     file_contents
 }
 
-///Adds a key/value pair to a hashmap, if the key already exists overwrite that key's value
+/// Returns a vector of characters from a file
+pub fn read_chars(file_in: String) -> Vec<char> {
+    let input_file = read_to_string(file_in).expect("Could not open file!");
+    let mut file_contents: Vec<char> = Vec::new();
+    let mut i = 0;
+
+    for character in input_file.chars() {
+        file_contents.push(character);
+    }
+    file_contents
+}
+
+///Adds a key/value pair to a hashmap, if the key already exists do nothing
 pub fn place_in_map<T: Eq + core::hash::Hash, U>(map: &mut HashMap<T, U>, key: T, value: U) {
     if !map.contains_key(&(key)) {
         map.insert(key, value);
     } else {
-        if let Some(v) = map.get_mut(&key) {
+        /*if let Some(v) = map.get_mut(&key) {
             *v = value;
-        }
+        }*/
     }
 }
