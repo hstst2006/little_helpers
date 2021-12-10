@@ -102,13 +102,18 @@ pub fn read_listified<T: std::str::FromStr>(file_in: String, delimiter: char) ->
 }
 
 /// Returns a vector of characters from a file
+/// Ignores newline and carriage return (\n and \r)
 pub fn read_chars(file_in: String) -> Vec<char> {
     let input_file = read_to_string(file_in).expect("Could not open file!");
     let mut file_contents: Vec<char> = Vec::new();
     let mut i = 0;
 
     for character in input_file.chars() {
-        file_contents.push(character);
+        if character == '\n' || character == '\r'{
+            continue;
+        } else {
+            file_contents.push(character);
+        }
     }
     file_contents
 }
