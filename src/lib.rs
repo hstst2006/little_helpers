@@ -16,7 +16,7 @@ use std::io::Write;
 ///                     3
 /// */
 /// ```
-pub fn listify_file(file_in: String, file_out: String, delimiter: char) ->  Result<String, std::io::Error> {
+pub fn listify_into_file(file_in: String, file_out: String, delimiter: char) ->  Result<String, std::io::Error> {
 
     let file_contents = read_to_string(file_in).expect("Could not open file!");
     let mut output_file = File::create(format!("{}", file_out)).unwrap();
@@ -49,7 +49,7 @@ pub fn listify_file(file_in: String, file_out: String, delimiter: char) ->  Resu
 /// // Returns a vector of values parsed to String
 /// let vector2: Vec<String> = read_listified(String::from("input.txt"), ',');
 /// ```
-pub fn listify_vec<T: std::str::FromStr>(file_in: String, delimiter: char) -> Vec<T> {
+pub fn listify_into_vec<T: std::str::FromStr>(file_in: String, delimiter: char) -> Vec<T> {
     let input_file = read_to_string(file_in).expect("Could not open file!");
     let mut file_contents: Vec<T> = Vec::new();
 
