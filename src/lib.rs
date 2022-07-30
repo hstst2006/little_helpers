@@ -3,7 +3,7 @@
 use std::fs::{File, read_to_string};
 use std::io::Write;
 
-/// Creates a new file containing the data from the input file where each item is on a separate line.
+/// Creates a new file containing the data from the input file where each item is separated by newlines.
 /// Items will be separated at the provided delimiter char.
 ///
 /// Returns the file name of the new file, or an error if failing to write a line to file
@@ -35,20 +35,7 @@ pub fn listify_into_file(file_in: String, file_out: String, delimiter: char) -> 
 
 /// Returns a vector of values from a file using a delimiter char.
 ///
-/// As every item is a string, the function restricts conversions to any type the FromStr trait implements.
-/// Conveniently lets us avoid using listify and read_file in conjunction.
-///
-/// # Example
-/// ```rust
-/// // Assuming a file "input.txt" is located in the working directory
-/// // Assuming the values to be read are separated by a known delimiter
-///
-/// // Returns a vector of values parsed to i32
-/// let vector: Vec<i32> = read_listified(String::from("input.txt"), ',');
-///
-/// // Returns a vector of values parsed to String
-/// let vector2: Vec<String> = read_listified(String::from("input.txt"), ',');
-/// ```
+/// As every item in the text file is a string, the function restricts conversions to any type the FromStr trait implements.
 pub fn listify_into_vec<T: std::str::FromStr>(file_in: String, delimiter: char) -> Vec<T> {
     let input_file = read_to_string(file_in).expect("Could not open file!");
     let mut file_contents: Vec<T> = Vec::new();
