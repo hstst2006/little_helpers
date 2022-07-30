@@ -2,7 +2,6 @@
 
 use std::fs::{File, read_to_string};
 use std::io::{BufRead, BufReader, Write};
-use std::collections::HashMap;
 
 /// Returns a vector of values from a file using lines
 ///
