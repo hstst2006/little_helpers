@@ -116,14 +116,3 @@ pub fn read_chars(file_in: String) -> Vec<char> {
     }
     file_contents
 }
-
-///Adds a key/value pair to a hashmap, if the key already exists do nothing
-pub fn place_in_map<T: Eq + core::hash::Hash, U>(map: &mut HashMap<T, U>, key: T, value: U) {
-    if !map.contains_key(&(key)) {
-        map.insert(key, value);
-    } else {
-        /*if let Some(v) = map.get_mut(&key) {
-            *v = value;
-        }*/
-    }
-}
