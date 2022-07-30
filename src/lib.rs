@@ -3,36 +3,6 @@
 use std::fs::{File, read_to_string};
 use std::io::{BufRead, BufReader, Write};
 
-/// Returns a vector of values from a file using lines
-///
-///As every line is a string, the function restricts conversions to any type the FromStr trait implements.
-/// # Example
-/// ```rust
-/// // Assuming a file "input.txt" is located in the working directory
-///
-/// // Returns a vector of values parsed to i32
-/// let vector: Vec<i32> = read_file(String::from("input.txt"));
-///
-/// // Returns a vector of values parsed to String
-/// let vector2: Vec<String> = read_file(String::from("input.txt"));
-/// ```
-pub fn read_file<T: std::str::FromStr>(file: String) -> Vec<T> {
-    let input_file = File::open(file).expect("Could not open file!");
-    let buf_reader = BufReader::new(input_file);
-    let mut file_contents: Vec<T> = Vec::new();
-
-    let mut i = 0;
-    for line in buf_reader.lines() {
-        let parsed = match line.unwrap().parse::<T>() {
-            Ok(generic_type) => {generic_type},
-            Err(_e) => {panic!("Something went wrong when processing line {}", i);},
-        };
-        file_contents.push(parsed);
-        i += 1;
-    }
-    file_contents
-}
-
 /// Creates a new file containing the data from the input file where each item is on a separate line.
 /// Items will be separated at the provided delimiter char.
 ///
@@ -68,7 +38,7 @@ pub fn listify(file_in: String, file_out: String, delimiter: char) -> String {
 
 /// Returns a vector of values from a file using a delimiter char.
 ///
-///As every item is a string, the function restricts conversions to any type the FromStr trait implements.
+/// As every item is a string, the function restricts conversions to any type the FromStr trait implements.
 /// Conveniently lets us avoid using listify and read_file in conjunction.
 ///
 /// # Example
