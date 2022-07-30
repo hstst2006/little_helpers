@@ -1,12 +1,12 @@
 //! Little_helpers is a library of helper functions intended to be used for reading Advent of Code input data.
 
 use std::fs::{File, read_to_string};
-use std::io::{BufRead, BufReader, Write};
+use std::io::Write;
 
 /// Creates a new file containing the data from the input file where each item is on a separate line.
 /// Items will be separated at the provided delimiter char.
 ///
-/// Returns the file name of the new file
+/// Returns the file name of the new file, or an error if failing to write a line to file
 /// # Example
 /// ```rust
 /// // Assuming a file "input.txt" is located in the working directory
@@ -15,25 +15,22 @@ use std::io::{BufRead, BufReader, Write};
 ///                     2
 ///                     3
 /// */
-/// let output_file_name: String = listify("input.txt", "output.txt", ',');
-///
-/// assert_eq!(output_file_name, "output.txt");
 /// ```
-pub fn listify(file_in: String, file_out: String, delimiter: char) -> String {
+pub fn listify_file(file_in: String, file_out: String, delimiter: char) ->  Result<String, std::io::Error> {
 
     let file_contents = read_to_string(file_in).expect("Could not open file!");
     let mut output_file = File::create(format!("{}", file_out)).unwrap();
 
-    let mut i = 0;
     for line in file_contents.split(delimiter) {
         if !line.is_empty() {
-            writeln!(output_file, "{}", line).expect(&format!("Could not write line number {} to file!", i));
-            i += 1;
+            match writeln!(output_file, "{}", line) {
+                Ok(_) => {},
+                Err(e) => {return Err(e);}
+            };
         }
     }
-    drop(i);
 
-    String::from(file_out)
+    Ok(String::from(file_out))
 }
 
 /// Returns a vector of values from a file using a delimiter char.
@@ -52,7 +49,7 @@ pub fn listify(file_in: String, file_out: String, delimiter: char) -> String {
 /// // Returns a vector of values parsed to String
 /// let vector2: Vec<String> = read_listified(String::from("input.txt"), ',');
 /// ```
-pub fn read_listified<T: std::str::FromStr>(file_in: String, delimiter: char) -> Vec<T> {
+pub fn listify_vec<T: std::str::FromStr>(file_in: String, delimiter: char) -> Vec<T> {
     let input_file = read_to_string(file_in).expect("Could not open file!");
     let mut file_contents: Vec<T> = Vec::new();
 
