@@ -1,7 +1,9 @@
 //! Little_helpers is a library of helper functions intended to be used for reading Advent of Code input data.
-
 use std::fs::{File, read_to_string};
 use std::io::{Write, Result};
+
+#[cfg(test)]
+mod test;
 
 /// Copies the contents of one file into a new file, with one item per line.
 /// 
