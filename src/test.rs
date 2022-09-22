@@ -1,5 +1,6 @@
 #[cfg(test)]
 mod tests {
+
     use crate::{listify_into_file, listify_into_vec};
     use std::fs::{File, read_to_string, remove_file};
     use std::io::{Write, Result};
@@ -38,7 +39,7 @@ mod tests {
     #[test]
     fn test_vector_i32() -> Result<()> {
         generate_test_file("test_vector.txt")?;
-        let vector: Vec<i32> = listify_into_vec("test_vector.txt".to_string(), ",");
+        let vector: Vec<i32> = listify_into_vec("test_vector.txt".to_string(), ",")?;
         for n in 0..10 {
             assert_eq!(vector[n], n as i32);
         }
