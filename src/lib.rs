@@ -7,17 +7,15 @@ mod test;
 
 /// Copies the contents of one file into a new file, with one item per line.
 /// 
-/// The items from the original file will be split at the delimiter token.
+/// The items from the original file will be split at the delimiter token, and empty lines will be ignored.
 /// Returns the File handle of the new file, or an error if it fails to create the output file.
 pub fn listify_into_file(file_in: String, file_out: String, delimiter: &str) -> Result<File> {
 
     let file_contents = read_to_string(file_in)?;
     let mut output_file = File::create(&file_out)?;
-
     for line in file_contents.split(delimiter).filter(|s| !s.is_empty()) {
         writeln!(output_file, "{}", line)?;
     }
-
     Ok(output_file)
 }
 
