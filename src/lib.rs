@@ -38,18 +38,6 @@ pub fn listify_into_file(file_in: String, file_out: String, delimiter: char) -> 
 /// As every item in the text file is a string, the function restricts conversions to any type the FromStr trait implements.
 pub fn listify_into_vec<T: std::str::FromStr>(file_in: String, delimiter: char) -> Vec<T> {
     let input_file = read_to_string(file_in).expect("Could not open file!");
-    let mut file_contents: Vec<T> = Vec::new();
-
-    let mut i = 0;
-    for item in input_file.split(delimiter) {
-        let parsed = match item.parse::<T>() {
-            Ok(generic_type) => {generic_type},
-            Err(_e) => {panic!("Something went wrong when processing item {}", i)},
-        };
-        file_contents.push(parsed);
-        i += 1;
-    }
-    drop(i);
-
+    let file_contents: Vec<T> = input_file.split(delimiter).filter_map(|val| val.parse().ok()).collect();
     file_contents
 }
