@@ -9,7 +9,7 @@ use std::io::{Write, Result};
 /// Returns the File handle of the new file, or an error if it fails to create the output file.
 pub fn listify_into_file(file_in: String, file_out: String, delimiter: &str) -> Result<File> {
 
-    let file_contents = read_to_string(file_in).expect("Could not open file!");
+    let file_contents = read_to_string(file_in)?;
     let mut output_file = File::create(&file_out)?;
 
     for line in file_contents.split(delimiter).filter(|s| !s.is_empty()) {
@@ -23,7 +23,7 @@ pub fn listify_into_file(file_in: String, file_out: String, delimiter: &str) -> 
 /// 
 /// Output vector only contains value types implementing the FromStr trait.
 pub fn listify_into_vec<T: std::str::FromStr>(file_in: String, delimiter: &str) -> Vec<T> {
-    let input_file = read_to_string(file_in).expect("Could not open file!");
+    let input_file = read_to_string(file_in)?;
     let file_contents: Vec<T> = input_file.split(delimiter).filter_map(|val| val.parse().ok()).collect();
     file_contents
 }
