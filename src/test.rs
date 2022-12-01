@@ -39,9 +39,9 @@ mod tests {
     #[test]
     fn test_vector_i32() -> Result<()> {
         generate_test_file("test_vector.txt")?;
-        let vector: Vec<i32> = listify_into_vec("test_vector.txt".to_string(), ",")?;
+        let vector: Vec<Option<i32>> = listify_into_vec("test_vector.txt".to_string(), Some(","))?;
         for n in 0..10 {
-            assert_eq!(vector[n], n as i32);
+            assert_eq!(vector[n], Some(n as i32));
         }
         cleanup_test_files("test_vector.txt", None)?;
         Ok(())
