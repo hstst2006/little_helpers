@@ -18,7 +18,7 @@ pub fn listify_into_file(file_in: String, file_out: String, delimiter: &str) -> 
     Ok(output_file)
 }
 
-/// Returns a vector of Option<value> from a file using a delimiter token.
+/// Returns a Result<Vec<T>> from a file using a delimiter token.
 /// 
 /// Output vector only contains value types implementing the FromStr trait.
 pub fn listify_into_vec<T: std::str::FromStr>(file_in: String, delimiter: &str) -> Result<Vec<T>>
@@ -29,25 +29,15 @@ pub fn listify_into_vec<T: std::str::FromStr>(file_in: String, delimiter: &str) 
     Ok(file_contents)
 }
 
-/// Returns a vector of Option<value> from a file using a delimiter token.
+/// Returns a Result<Vec<Option<T>>> from a file using a lines
 /// 
 /// Output vector only contains value types implementing the FromStr trait.
-/// If no delimiter is provided, lines will be used as an alternative. Empty lines will be "None" entries in the vector
-pub fn listify_into_vec_option<T: std::str::FromStr>(file_in: String, delimiter: Option<&str>) -> Result<Vec<Option<T>>> {
+/// Empty lines will be "None" entries in the vector
+pub fn listify_lines<T: std::str::FromStr>(file_in: String) -> Result<Vec<Option<T>>> {
     let input_file = read_to_string(file_in)?;
 
-    match delimiter
-    {
-        Some(d) => 
-        {
-            let file_contents: Vec<Option<T>> = input_file.split(d).map(|val| val.parse().ok()).collect();
-            Ok(file_contents)
-        },
-        None => 
-        {
-            let file_contents: Vec<Option<T>> = input_file.lines().map(|val| val.parse().ok()).collect();
-            Ok(file_contents)
-        },
-    } 
+    let file_contents: Vec<Option<T>> = input_file.lines().map(|val| val.parse().ok()).collect();
+    Ok(file_contents)
+
 }
 
