@@ -32,7 +32,6 @@ pub fn listify_into_vec<T: std::str::FromStr>(file_in: &str, delimiter: &str) ->
 /// Returns a Result<Vec<Option<T>>> from a file using a lines as delimiter token
 /// 
 /// Output vector only contains value types implementing the FromStr trait.
-/// Empty lines will be "None" entries in the vector
 pub fn listify_lines<T: std::str::FromStr>(file_in: &str) -> Result<Vec<Option<T>>> {
     let input_file = read_to_string(file_in)?;
 
