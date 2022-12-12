@@ -27,7 +27,7 @@ mod tests {
     #[test]
     fn test_file() -> Result<()> {
         generate_test_file("test_file.txt")?;
-        listify_into_file("test_file.txt".to_string(), "output.txt".to_string(), ",")?;
+        listify_into_file("test_file.txt".to_string(), "output.txt", ",")?;
 
         assert_eq!("0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n", read_to_string("output.txt")?);
 
@@ -39,7 +39,7 @@ mod tests {
     #[test]
     fn test_vector_i32() -> Result<()> {
         generate_test_file("test_vector.txt")?;
-        let vector: Vec<i32> = listify_into_vec("test_vector.txt".to_string(), ",")?;
+        let vector: Vec<i32> = listify_into_vec("test_vector.txt", ",")?;
         for n in 0..10 {
             assert_eq!(vector[n], n as i32);
         }
