@@ -21,6 +21,7 @@ pub fn listify_into_file(file_in: String, file_out: &str, delimiter: &str) -> Re
 /// Returns a Result<Vec<T>> from a file using a delimiter token.
 /// 
 /// Output vector only contains value types implementing the FromStr trait.
+/// If parsing to something that is not a string type, invalid values will be omitted
 pub fn listify_into_vec<T: std::str::FromStr>(file_in: &str, delimiter: &str) -> Result<Vec<T>>
 {
     let input_file = read_to_string(file_in)?;
@@ -32,6 +33,7 @@ pub fn listify_into_vec<T: std::str::FromStr>(file_in: &str, delimiter: &str) ->
 /// Returns a Result<Vec<Option<T>>> from a file using a lines as delimiter token
 /// 
 /// Output vector only contains value types implementing the FromStr trait.
+/// If parsing to something that is not a string type, invalid lines will be None
 pub fn listify_lines<T: std::str::FromStr>(file_in: &str) -> Result<Vec<Option<T>>> {
     let input_file = read_to_string(file_in)?;
 
@@ -40,3 +42,8 @@ pub fn listify_lines<T: std::str::FromStr>(file_in: &str) -> Result<Vec<Option<T
 
 }
 
+/// Maps 2d coordinates to a 1d index based on the width of the coordinate system
+pub fn coords_to_index(x: usize, y: usize, width: usize) -> usize
+{
+    x + (y * width)
+}
