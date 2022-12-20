@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests {
 
-    use crate::{listify_into_file, listify_into_vec};
+    use crate::listify::{listify_into_file, listify_into_vec};
     use std::fs::{File, read_to_string, remove_file};
     use std::io::{Write, Result};
 
