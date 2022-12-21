@@ -67,4 +67,28 @@ pub mod coords {
         index / width
     }
 
+    /// Checks if a given coordinate is along an edge
+    pub fn coord_along_edge(x: usize, y: usize, width: usize, height: usize) -> bool
+    {
+        if  x == 0 ||
+            x == width - 1 || 
+            y == 0 ||
+            y == height - 1 
+        { true } 
+        else
+        { false }
+    }
+
+    /// Checks if a given index is along an edge
+    pub fn index_along_edge(index: usize, width: usize, height: usize) -> bool
+    {
+        if  index_to_x(index, width) == 0 ||
+            index_to_x(index, width) == width - 1 ||
+            index_to_y(index, width) == 0 ||
+            index_to_y(index, width) == height - 1
+        { true }
+        else 
+        { false }
+    }
+
 }
