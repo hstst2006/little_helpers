@@ -1,3 +1,4 @@
+#[cfg(test)]
 mod tests {
 
     use crate::listify::{listify_into_file, listify_into_vec};
