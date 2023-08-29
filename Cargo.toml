@@ -6,6 +6,9 @@ authors = ["Håvard Skordal Thorsen"]
 description = "A small library of helper functions for reading the Advent of Code challenge data into a new separate file or vector."
 repository = "https://github.com/hstst2006/little_helpers"
 
+[lib]
+doctest = false
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
